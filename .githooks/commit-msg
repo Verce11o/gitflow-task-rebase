@@ -1,0 +1,12 @@
+COMMIT_MSG=$(cat $1)
+MSG_LENGTH=$(echo "$COMMIT_MSG" | wc -c)
+
+if [ "$MSG_LENGTH" -gt 50 ]; then
+  echo "ERROR: The commit message is longer than 50 characters."
+  exit 1
+fi
+
+if echo "$COMMIT_MSG" | grep -q "\.$"; then
+  echo "ERROR: The commit message should not end with a dot."
+  exit 1
+fi
